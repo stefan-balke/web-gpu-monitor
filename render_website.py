@@ -2,6 +2,7 @@
     Render static website based on the load data.
 """
 import os
+import time
 import jinja2
 import pandas as pd
 
@@ -9,13 +10,15 @@ import pandas as pd
 if __name__ == '__main__':
     PATH = os.path.dirname(os.path.abspath(__file__))
     PATH_OUTPUT = 'output'
+    PATH_DATA = 'load_data.csv'
 
     if not os.path.exists(PATH_OUTPUT):
         os.makedirs(PATH_OUTPUT)
 
-    load_data = pd.read_csv('load_data.csv')
+    load_data = pd.read_csv(PATH_DATA)
     load_data = load_data.groupby(by='hostname')
-    context = {'hosts': load_data}
+    modification_time = time.ctime(os.path.getmtime('load_data.csv'))
+    context = {'hosts': load_data, 'modification_time': modification_time}
 
     # get jinja template
     template_env = jinja2.Environment(loader=jinja2.FileSystemLoader(os.path.join(PATH, 'templates')))
