@@ -20,12 +20,12 @@
           </thead>
           <tbody>
             {% for cur_idx, cur_gpu in cur_host.iterrows() %}
-            <tr {% if cur_gpu.load == 0 %}
-                    class="table-success"
-                {% else %}
+            <tr {% if cur_gpu.load >= 5 or cur_gpu.load_mem != 0 %}
                     class="table-danger"
                     data-toggle="tooltip"
-                    title="{{ cur_gpu.username }}"
+                    title="{{ cur_gpu.username }}, Memory: {{ cur_gpu.load_mem }}%"
+                {% else %}
+                    class="table-success"
                 {% endif %}>
               <th scope="row">{{ cur_gpu.gpu_idx}}</th>
               <td>{{ cur_gpu.gpu_name|replace('GeForce GTX ', '') }}</td>

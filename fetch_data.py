@@ -36,7 +36,7 @@ def get_gpu_processes(hostname, user):
 
 def get_load_data(hostname, user):
     """Get the output from `nvidia-smi` and parse it."""
-    SSH_CMD = 'nvidia-smi --query-gpu=utilization.gpu,index,gpu_name,gpu_uuid --format=csv'
+    SSH_CMD = 'nvidia-smi --query-gpu=utilization.gpu,utilization.memory,index,gpu_name,gpu_uuid --format=csv'
 
     result = Connection(hostname, user=user).run(SSH_CMD, hide=True).stdout  # does return a CSV
 
@@ -44,11 +44,13 @@ def get_load_data(hostname, user):
     csv = pd.read_csv(csv)  # parse as csv
 
     csv = csv.rename(columns={'utilization.gpu [%]': 'load',
+                              ' utilization.memory [%]': 'load_mem',
                               ' name': 'gpu_name',
                               ' uuid': 'gpu_uuid',
                               ' index': 'gpu_idx'})
 
     csv['load'] = csv['load'].map(lambda x: int(x.rstrip('%')))
+    csv['load_mem'] = csv['load_mem'].map(lambda x: int(x.rstrip('%')))
     csv['hostname'] = cur_host  # add column with hostname
 
     return csv
