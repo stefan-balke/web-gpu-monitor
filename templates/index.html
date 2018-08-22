@@ -20,7 +20,7 @@
           </thead>
           <tbody>
             {% for cur_idx, cur_gpu in cur_host.iterrows() %}
-            <tr {% if cur_gpu.load >= 5 or cur_gpu.load_mem != 0 %}
+            <tr {% if cur_gpu.load >= 5 or cur_gpu.load_mem != 0 or cur_gpu.username != -1 %}
                     class="table-danger"
                     data-toggle="tooltip"
                     title="{{ cur_gpu.username }}, Memory: {{ cur_gpu.load_mem }}%"

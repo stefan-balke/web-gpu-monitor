@@ -16,6 +16,7 @@ if __name__ == '__main__':
         os.makedirs(PATH_OUTPUT)
 
     load_data = pd.read_csv(PATH_DATA)
+    load_data['username'] = load_data['username'].fillna(-1)
     load_data = load_data.groupby(by='hostname')
     modification_time = time.ctime(os.path.getmtime('load_data.csv'))
     context = {'hosts': load_data, 'modification_time': modification_time}
