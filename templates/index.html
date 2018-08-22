@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{{ hosts }}
+<div class="card-deck mb-3 text-center">
+{% for cur_hostname, cur_host in hosts %}
+  <div class="card mb-4 shadow-sm">
+    <div class="card-header">
+      <h4 class="my-0 font-weight-normal">{{ cur_hostname }}</h4>
+    </div>
+    <div class="card-body">
+      <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">#ID</th>
+              <th scope="col">GPU</th>
+              <th scope="col">Load</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for cur_idx, cur_gpu in cur_host.iterrows() %}
+            <tr {% if cur_gpu.load == 0 %}
+                    class="table-success"
+                {% else %}
+                    class="table-danger"
+                    data-toggle="tooltip"
+                    title="{{ cur_gpu.username }}"
+                {% endif %}>
+              <th scope="row">{{ cur_gpu.gpu_idx}}</th>
+              <td>{{ cur_gpu.gpu_name|replace('GeForce GTX ', '') }}</td>
+              <td>{{ cur_gpu.load }} %</td>
+            </tr>
+            {% endfor %}
+
+          </tbody>
+        </table>
+    </div>
+  </div>
+{% endfor %}
+</div>
+
+{% endblock %}

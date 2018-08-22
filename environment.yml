@@ -1,0 +1,13 @@
+name: web_gpu_monitor
+
+channels:
+  - defaults
+  - conda-forge
+
+dependencies:
+  - python=3.6
+  - pandas
+
+  - pip:
+    - jinja2
+    - fabric
