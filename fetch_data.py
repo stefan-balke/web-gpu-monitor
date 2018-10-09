@@ -6,15 +6,21 @@ import configparser
 import io
 from fabric import Connection
 import pandas as pd
+import invoke
 
 
 def get_username(pid, hostname, user):
     """Get the corresponding username for a PID"""
     SSH_CMD = 'ps -o user= {}'.format(pid)
 
-    result = Connection(hostname, user=user).run(SSH_CMD, hide=True).stdout
+    # sometimes zombies occur...
+    try:
+        result = Connection(hostname, user=user).run(SSH_CMD, hide=True).stdout
+        result = str.strip(result)
+    except invoke.exceptions.UnexpectedExit:
+        result = None
 
-    return str.strip(result)
+    return result
 
 
 def get_gpu_processes(hostname, user):
@@ -29,6 +35,10 @@ def get_gpu_processes(hostname, user):
 
     for cur_idx, cur_row in csv.iterrows():
         username = get_username(cur_row['pid'], hostname, user)
+
+        if username is None:
+            username = 'Zombie'
+
         csv.loc[cur_idx, 'username'] = username
 
     return csv
@@ -67,8 +77,9 @@ def get_data(hostname, user):
         # combine load data with username through gpu_uuid
         for cur_idx, cur_row in load_data.iterrows():
             if not process_data[process_data['gpu_uuid'] == cur_row['gpu_uuid']].empty:
-                username = process_data[process_data['gpu_uuid'] == cur_row['gpu_uuid']]['username'].values[0]
-                load_data.loc[cur_idx, 'username'] = username
+                username = process_data[process_data['gpu_uuid'] == cur_row['gpu_uuid']]['username'].values
+
+                load_data.loc[cur_idx, 'username'] = ', '.join(username)
 
     return load_data
 
