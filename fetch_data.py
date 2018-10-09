@@ -10,7 +10,7 @@ import pandas as pd
 
 def get_username(pid, hostname, user):
     """Get the corresponding username for a PID"""
-    SSH_CMD = 'ps -o user= {}'.format(pid)
+    SSH_CMD = 'ps -o user={}'.format(pid)
 
     result = Connection(hostname, user=user).run(SSH_CMD, hide=True).stdout
 
