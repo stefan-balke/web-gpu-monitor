@@ -1,0 +1,25 @@
+,load,load_mem,gpu_idx,gpu_name,gpu_uuid,hostname,username
+0,0,0,0, GeForce GTX 1080 Ti, GPU-aa,host1.domain.tld,
+1,0,0,1, GeForce GTX 1080 Ti, GPU-ab,host1.domain.tld,
+2,0,0,2, GeForce GTX 1080 Ti, GPU-ac,host1.domain.tld,
+3,0,0,3, GeForce GTX 1080 Ti, GPU-ad,host1.domain.tld,
+0,77,10,0, GeForce GTX 1080, GPU-ba,host2.domain.tld,user1
+1,92,49,1, GeForce GTX 1080, GPU-bb,host2.domain.tld,user1
+2,0,0,2, GeForce GTX 1080, GPU-bc,host2.domain.tld,
+3,0,0,3, GeForce GTX 1080, GPU-bd,host2.domain.tld,
+0,92,68,0, GeForce GTX 1080 Ti, GPU-ca,host3.domain.tld,user2
+1,0,0,1, GeForce GTX 1080 Ti, GPU-cb,host3.domain.tld,
+2,0,0,2, GeForce GTX 1080 Ti, GPU-cc,host3.domain.tld,
+3,0,0,3, GeForce GTX 1080 Ti, GPU-cd,host3.domain.tld,
+0,0,0,0, GeForce GTX 1080 Ti, GPU-da,host4.domain.tld,
+1,100,13,1, GeForce GTX 1080 Ti, GPU-db,host4.domain.tld,user3
+2,0,0,2, GeForce GTX 1080 Ti, GPU-dc,host4.domain.tld,user4
+3,100,8,3, GeForce GTX 1080 Ti, GPU-dd,host4.domain.tld,user3
+0,0,0,0, GeForce GTX 1080 Ti, GPU-ea,host5.domain.tld,
+1,0,0,1, GeForce GTX 1080 Ti, GPU-eb,host5.domain.tld,
+2,0,0,2, GeForce GTX 1080 Ti, GPU-ec,host5.domain.tld,
+3,0,0,3, GeForce GTX 1080 Ti, GPU-ed,host5.domain.tld,
+0,91,38,0, GeForce GTX 1080 Ti, GPU-fa,host6.domain.tld,"user5, user5"
+1,96,43,1, GeForce GTX 1080 Ti, GPU-fb,host6.domain.tld,"user5, user5"
+2,96,34,2, GeForce GTX 1080 Ti, GPU-fc,host6.domain.tld,"user5, user5"
+3,97,46,3, GeForce GTX 1080 Ti, GPU-fd,host6.domain.tld,"user5, user5"
